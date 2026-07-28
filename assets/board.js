@@ -1,11 +1,17 @@
 // ============================================================================
 // BOARD RENDERER — shared between admin.html (clickable) and viewer.html
 // (display-only). Builds the fixed 1920x1080 "stage" and keeps it scaled to
-// fit any viewport, per the approved design reference.
+// fit any viewport.
+//
+// Display order differs by screen:
+//   - admin: alphabetical, so the operator can find a name fast mid-show.
+//   - viewer: shuffled (fixed seed, so it's stable across reloads) and then
+//     repacked against each name's REAL measured width so rows still fill
+//     edge to edge with minimal leftover space, despite the random order.
 // ============================================================================
 
-// Fixed-seed PRNG so admin.html and viewer.html — loaded independently —
-// always compute the identical color assignment for the same character list.
+// Fixed-seed PRNG so repeated runs (and both screens' color assignment)
+// are deterministic rather than different every reload.
 function mulberry32(seed) {
   return function () {
     seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
@@ -13,6 +19,16 @@ function mulberry32(seed) {
     t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
+}
+
+function shuffleWithSeed(list, seed) {
+  const rng = mulberry32(seed);
+  const arr = list.slice();
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    const tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+  }
+  return arr;
 }
 
 // Random per-name color, but never the same as the previous name in reading
@@ -31,6 +47,32 @@ function assignVariants(count) {
     variants.push(pick);
   }
   return variants;
+}
+
+// Best-fit-decreasing bin packing against each name's actual rendered width,
+// so flex-wrap rows fill edge to edge instead of leaving ragged gaps.
+function packForCoverage(containerWidth, gapPx, names, widthByName) {
+  const items = names.map((name) => ({ name, width: widthByName[name] }));
+  const sorted = items.slice().sort((a, b) => b.width - a.width);
+  const rows = [];
+  sorted.forEach((item) => {
+    let bestRow = null;
+    let bestRemaining = Infinity;
+    rows.forEach((row) => {
+      const remaining = containerWidth - (row.usedWidth + gapPx) - item.width;
+      if (remaining >= 0 && remaining < bestRemaining) {
+        bestRemaining = remaining;
+        bestRow = row;
+      }
+    });
+    if (bestRow) {
+      bestRow.usedWidth += gapPx + item.width;
+      bestRow.items.push(item.name);
+    } else {
+      rows.push({ usedWidth: item.width, items: [item.name] });
+    }
+  });
+  return rows.flatMap((r) => r.items);
 }
 
 function renderBoard(root, { clickable, onTileClick } = {}) {
@@ -66,36 +108,60 @@ function renderBoard(root, { clickable, onTileClick } = {}) {
   const quoteEl = root.querySelector('#revealQuote');
 
   const tileEls = {};
-  const separatorEls = [];
   const charByName = new Map(FLAT_CHARACTERS.map((c) => [c.name, c]));
-  // BOARD_ORDER is a packing-optimized display order; fall back to appending
-  // anyone missing from it (e.g. a name added to CATEGORIES without
-  // recomputing the order) so nobody silently drops off the board.
-  const orderedNames = BOARD_ORDER.filter((name) => charByName.has(name));
-  FLAT_CHARACTERS.forEach((c) => { if (!orderedNames.includes(c.name)) orderedNames.push(c.name); });
+  const allNames = FLAT_CHARACTERS.map((c) => c.name);
 
-  const variants = assignVariants(orderedNames.length);
+  const initialOrder = clickable
+    ? allNames.slice().sort((a, b) => a.localeCompare(b))
+    : shuffleWithSeed(allNames, 20260728);
 
-  orderedNames.forEach((name, i) => {
-    const character = charByName.get(name);
-    const tag = document.createElement('span');
-    tag.className = 'name-tag name-tag-' + TILE_VARIANTS[variants[i]];
-    tag.textContent = character.name;
-    tag.dataset.name = character.name;
-    if (clickable) {
-      tag.style.cursor = 'pointer';
-      tag.addEventListener('click', () => onTileClick && onTileClick(character.name));
+  const variants = assignVariants(allNames.length);
+  const variantByName = {};
+  initialOrder.forEach((name, i) => { variantByName[name] = variants[i]; });
+
+  function buildRow(order) {
+    cloud.innerHTML = '';
+    Object.keys(tileEls).forEach((k) => delete tileEls[k]);
+    order.forEach((name, i) => {
+      const character = charByName.get(name);
+      const tag = document.createElement('span');
+      tag.className = 'name-tag name-tag-' + TILE_VARIANTS[variantByName[name]];
+      tag.textContent = character.name;
+      tag.dataset.name = character.name;
+      if (clickable) {
+        tag.style.cursor = 'pointer';
+        tag.addEventListener('click', () => onTileClick && onTileClick(character.name));
+      }
+      cloud.appendChild(tag);
+      tileEls[character.name] = tag;
+
+      if (i < order.length - 1) {
+        const sep = document.createElement('span');
+        sep.className = 'name-separator';
+        cloud.appendChild(sep);
+      }
+    });
+  }
+
+  buildRow(initialOrder);
+
+  if (!clickable) {
+    // Repack once the real webfont is active — measuring before it loads
+    // would pack against fallback-font widths and could drift out of fit
+    // once Poppins swaps in.
+    const repack = () => {
+      const gapPx = parseFloat(getComputedStyle(cloud).columnGap) || 0;
+      const widthByName = {};
+      initialOrder.forEach((name) => { widthByName[name] = tileEls[name].getBoundingClientRect().width; });
+      const packed = packForCoverage(cloud.clientWidth, gapPx, initialOrder, widthByName);
+      buildRow(packed);
+    };
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(repack);
+    } else {
+      repack();
     }
-    cloud.appendChild(tag);
-    tileEls[character.name] = tag;
-
-    if (i < orderedNames.length - 1) {
-      const sep = document.createElement('span');
-      sep.className = 'name-separator';
-      cloud.appendChild(sep);
-      separatorEls.push(sep);
-    }
-  });
+  }
 
   if (clickable) {
     overlay.addEventListener('click', () => onTileClick && onTileClick(null, { reset: true }));
@@ -109,7 +175,7 @@ function renderBoard(root, { clickable, onTileClick } = {}) {
       el.classList.toggle('is-selected', isSelected);
       el.classList.toggle('is-dim', !!selected && !isSelected);
     });
-    separatorEls.forEach((el) => el.classList.toggle('is-dim', !!selected));
+    cloud.querySelectorAll('.name-separator').forEach((el) => el.classList.toggle('is-dim', !!selected));
 
     if (revealed) {
       const character = FLAT_CHARACTERS.find((c) => c.name === revealed);

@@ -1,5 +1,5 @@
 // ============================================================================
-// CHARACTER DATA — 68 figures spanning the Ramayana, Mahabharata, Vedic/Puranic
+// CHARACTER DATA — 58 figures spanning the Ramayana, Mahabharata, Vedic/Puranic
 // sages, Vedanta acharyas, Bhakti-movement saints, warrior-rulers, and
 // scholars/poets.
 //
@@ -9,9 +9,10 @@
 // religious teachers and saints, please review every line for accuracy and
 // respectfulness before using this at Shibir.
 //
-// The board itself no longer groups by category (it's a flat name cloud),
-// but the CATEGORIES grouping here still feeds the "epic" tag shown on the
-// reveal card.
+// Display order is computed at runtime in board.js (alphabetical on admin,
+// shuffled + repacked on viewer) — this file is just the content, grouped
+// by category purely so the reveal card's "epic" tag has something
+// meaningful to show.
 // ============================================================================
 
 const CATEGORIES = [
@@ -25,35 +26,28 @@ const CATEGORIES = [
     ['Urmila', 'Lakshman\'s wife, remembered for her quiet sacrifice while he accompanied Rama into exile.'],
     ['Shabari', 'A humble devotee who waited a lifetime in the forest for the chance to offer Rama her berries.'],
     ['Jatayu', 'The aged vulture king who gave his life fighting Ravana in an attempt to save Sita.'],
-    ['Vibhishan', 'Ravana\'s righteous younger brother, who chose dharma over blood and joined Rama.'],
   ]},
   { name: 'Mahabharata', chars: [
     ['Bhagwan Krishna', 'The eighth avatar of Vishnu; Arjun\'s charioteer and guide, whose counsel on the battlefield became the Bhagavad Gita.'],
+    ['Draupadi', 'Wife of the five Pandavas, whose humiliation in the Kaurava court became a turning point of the epic.'],
     ['Arjun', 'The third Pandava, a peerless archer and the direct recipient of Krishna\'s teachings.'],
     ['Yudhishthir', 'Eldest Pandava and king, called Dharmaraja for his unwavering commitment to truth.'],
-    ['Bhim', 'The second Pandava, renowned for his immense strength and mastery of the mace.'],
-    ['Draupadi', 'Wife of the five Pandavas, whose humiliation in the Kaurava court became a turning point of the epic.'],
-    ['Kunti', 'Mother of the three eldest Pandavas and Karna, remembered for her strength through years of hardship.'],
-    ['Karna', 'Kunti\'s firstborn son, raised as a charioteer\'s child, celebrated for his generosity and loyalty.'],
     ['Bhishma', 'The grand patriarch who took a lifelong vow of celibacy and could choose the moment of his own death.'],
     ['Vidur', 'The wise and impartial minister of Hastinapur, remembered for his integrity and counsel.'],
     ['Abhimanyu', 'Arjun\'s son, who bravely broke into the Chakravyuha formation but could not find his way out.'],
     ['Ekalavya', 'A self-taught archer who famously gave his thumb as guru-dakshina to Dronacharya.'],
   ]},
   { name: 'Sages & Devotees', chars: [
-    ['Maharishi Valmiki', 'The sage-poet credited with composing the Ramayana, the adi-kavya, or first epic poem.'],
+    ['Maharishi Vashisht', 'The royal sage and guru of the Raghu dynasty, including Rama.'],
     ['Maharishi Ved Vyas', 'The sage credited with compiling the Mahabharata and organizing the Vedas.'],
     ['Prahlad', 'A young devotee of Vishnu whose unshakeable faith survived every trial his father put him through.'],
     ['Dhruv', 'A child whose determined penance to Vishnu earned him a place as the eternal pole star.'],
     ['Nachiketa', 'A boy from the Katha Upanishad whose questions to Yama, the god of death, revealed the nature of the eternal Self.'],
-    ['Raja Harishchandra', 'A king celebrated for keeping his word at the cost of his kingdom, wife, and son.'],
     ['Raja Janak', 'The philosopher-king of Mithila and Sita\'s father, revered for ruling while remaining spiritually detached.'],
     ['Savitri', 'A devoted wife whose wit and resolve won her husband Satyavan\'s life back from Yama.'],
     ['Gargi', 'A Vedic philosopher renowned for boldly questioning the sage Yajnavalkya in the court of King Janak.'],
     ['Maitreyi', 'A Vedic scholar remembered for choosing spiritual wisdom over worldly wealth.'],
-    ['Maharishi Vashishtha', 'The royal sage and guru of the Raghu dynasty, including Rama.'],
-    ['Maharishi Vishwamitra', 'A king turned sage through rigorous penance, and guru to young Rama and Lakshman.'],
-    ['Rishi Dadhichi', 'A sage who gave up his own bones so the gods could forge the weapon that defeated the demon Vritra.'],
+    ['Ambarish Raja', 'A devoted king whose unwavering faith and humility, even under a sage\'s curse, showed the protective power of surrender to God.'],
   ]},
   { name: 'Acharyas & Gurus', chars: [
     ['Adi Shankaracharya', 'An 8th-century philosopher who traveled across India establishing four mathas and systematizing Advaita Vedanta.'],
@@ -68,9 +62,7 @@ const CATEGORIES = [
   { name: 'Bhakti Saints', chars: [
     ['Sant Kabir', 'A 15th-century poet-saint whose dohas cut across caste and creed to point directly at the divine.'],
     ['Sant Tukaram', 'A Maharashtrian poet-saint whose abhangas expressed deep devotion to Vitthal of Pandharpur.'],
-    ['Sant Eknath', 'A Marathi saint-scholar remembered for his commentaries and devotion to Vitthal.'],
-    ['Sant Namdev', 'An early Varkari poet-saint whose devotional hymns influenced bhakti traditions across India.'],
-    ['Sant Dnyaneshwar', 'A 13th-century saint who wrote the Dnyaneshwari, a celebrated commentary on the Bhagavad Gita, in his teens.'],
+    ['Sant Gyanneshwar', 'A 13th-century saint who wrote the Dnyaneshwari, a celebrated commentary on the Bhagavad Gita, in his teens.'],
     ['Sant Ravidas', 'A poet-saint whose verses on equality and devotion transcended the caste barriers of his time.'],
     ['Sant Tulsidas', 'Author of the Ramcharitmanas, which brought the story of Rama to millions in the language of the people.'],
     ['Sant Surdas', 'A blind poet-saint whose verses on Krishna\'s childhood remain central to Krishna bhakti.'],
@@ -84,7 +76,6 @@ const CATEGORIES = [
     ['Chhatrapati Shivaji Maharaj', 'Founder of the Maratha Empire, celebrated for his statecraft and swarajya, or self-rule.'],
     ['Maharana Pratap', 'The Rajput king of Mewar, remembered for his defiance against Mughal rule and devotion to his homeland.'],
     ['Rani Lakshmibai', 'The Rani of Jhansi, whose courage leading her army in 1857 made her an icon of resistance.'],
-    ['Prithviraj Chauhan', 'The last Hindu king of Delhi before the Ghurid conquest, remembered for his valor.'],
     ['Chhatrapati Sambhaji Maharaj', 'Shivaji\'s son and successor, remembered for his resilience under relentless persecution.'],
     ['Emperor Ashoka', 'The Mauryan emperor who, after the Kalinga war, embraced Buddhism and ruled through dhamma.'],
     ['Chandragupta Maurya', 'Founder of the Maurya Empire, guided by his mentor Chanakya to unify much of the Indian subcontinent.'],
@@ -106,26 +97,3 @@ const FLAT_CHARACTERS = [];
 CATEGORIES.forEach((cat) => cat.chars.forEach(([name, quote]) => {
   FLAT_CHARACTERS.push({ name, quote, epic: cat.name.split(':')[0].trim() });
 }));
-
-// Display order for the name cloud — computed via a best-fit-decreasing bin
-// pack against each name's actual rendered width at the current font size,
-// so the flex-wrap rows fill edge to edge with minimal leftover whitespace
-// (measured ~3% waste/row here vs. ~12% in category-grouped order). This is
-// purely a layout order; CATEGORIES above stays the source of truth for
-// content/epic tags. If names, fonts, or the name-tag font-size ever change,
-// this order should be recomputed (see README for the recompute script).
-const BOARD_ORDER = [
-  'Chhatrapati Sambhaji Maharaj', 'Chhatrapati Shivaji Maharaj', 'Ramakrishna Paramahansa',
-  'Nachiketa', 'Bhagwan Swaminarayan', 'Maharishi Vishwamitra', 'Chandragupta Maurya',
-  'Maharishi Vashishtha', 'Rabindranath Tagore', 'Adi Shankaracharya', 'Swami Vivekananda',
-  'Raja Harishchandra', 'Narsinh Mehta', 'Maharishi Ved Vyas', 'Prithviraj Chauhan',
-  'Sant Dnyaneshwar', 'Maharishi Valmiki', 'Bhagwan Krishna', 'Maharana Pratap',
-  'Ramanujacharya', 'Mata Sharda Devi', 'Samarth Ramdas', 'Nimbarkacharya', 'Bhishma',
-  'Rani Lakshmibai', 'Emperor Ashoka', 'Vallabhacharya', 'Guru Nanak Dev', 'Madhvacharya',
-  'Bhagwan Ram', 'Rishi Dadhichi', 'Sant Tukaram', 'Sant Namdev', 'Sant Tulsidas',
-  'Sant Ravidas', 'Sant Surdas', 'Shatrughna', 'Sant Eknath', 'Abhimanyu', 'Yudhishthir',
-  'Raja Janak', 'Aryabhata', 'Lakshman', 'Chanakya', 'Sant Kabir', 'Bhim', 'Vibhishan',
-  'Hanuman', 'Meera Bai', 'Draupadi', 'Ekalavya', 'Sushruta', 'Kalidasa', 'Charaka',
-  'Maitreyi', 'Prahlad', 'Shabari', 'Jatayu', 'Bharat', 'Urmila', 'Savitri', 'Karna',
-  'Dhruv', 'Arjun', 'Gargi', 'Vidur', 'Kunti', 'Sita',
-];
