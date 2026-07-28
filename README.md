@@ -22,11 +22,12 @@ quote/fact reveals on the viewer (LED panels).
 ### Adding portrait photos
 
 The reveal card has a portrait slot next to the name/quote. It looks for an
-image at `assets/portraits/<name-slug>.jpg` (lowercase, spaces → hyphens —
-e.g. `Bhagwan Krishna` → `assets/portraits/bhagwan-krishna.jpg`). If that
-file doesn't exist, it falls back to the person's initials in the color
-already assigned to their name on the board — no code changes needed, just
-drop matching image files into `assets/portraits/`.
+image at `assets/portraits/<name-slug>.<ext>` — lowercase, spaces → hyphens
+(e.g. `Bhagwan Krishna` → `bhagwan-krishna`), trying `.jpg`, `.jpeg`, `.png`,
+then `.webp` in that order, so whatever format you save the photo in just
+works. If none of those exist, it falls back to the person's initials in
+the color already assigned to their name on the board — no code changes
+needed, just drop matching image files into `assets/portraits/`.
 
 ## Two ways it syncs
 

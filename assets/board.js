@@ -25,6 +25,21 @@ function slugify(name) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 }
 
+const PORTRAIT_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp'];
+
+// Tries assets/portraits/<slug>.<ext> for each extension in turn (whatever
+// format the photo happened to be saved in), falling back to the initials
+// placeholder (already showing) if none of them exist.
+function loadPortrait(imgEl, fallbackEl, slug, extIndex) {
+  if (extIndex >= PORTRAIT_EXTENSIONS.length) {
+    imgEl.style.display = 'none';
+    fallbackEl.style.display = 'flex';
+    return;
+  }
+  imgEl.onerror = () => loadPortrait(imgEl, fallbackEl, slug, extIndex + 1);
+  imgEl.src = 'assets/portraits/' + slug + '.' + PORTRAIT_EXTENSIONS[extIndex];
+}
+
 function shuffleWithSeed(list, seed) {
   const rng = mulberry32(seed);
   const arr = list.slice();
@@ -199,18 +214,13 @@ function renderBoard(root, { clickable, onTileClick } = {}) {
         portraitFallbackEl.style.color = tileColor;
         portraitFallbackEl.style.display = 'flex';
         portraitImgEl.style.display = 'none';
-        portraitImgEl.onerror = () => {
-          portraitImgEl.style.display = 'none';
-          portraitFallbackEl.style.display = 'flex';
-        };
         portraitImgEl.onload = () => {
           portraitImgEl.style.display = 'block';
           portraitFallbackEl.style.display = 'none';
         };
-        // No real portraits yet — this looks for one at a conventional path
-        // and falls back to initials if it's not there. Drop a photo in
-        // assets/portraits/<name-slug>.jpg to have it appear automatically.
-        portraitImgEl.src = 'assets/portraits/' + slugify(character.name) + '.jpg';
+        // Looks for a portrait at assets/portraits/<name-slug>.<ext>, trying
+        // each extension in turn, and falls back to initials if none exist.
+        loadPortrait(portraitImgEl, portraitFallbackEl, slugify(character.name), 0);
       }
       overlay.classList.add('visible');
     } else {
