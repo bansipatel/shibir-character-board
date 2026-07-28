@@ -130,6 +130,7 @@ function renderBoard(root, { clickable, onTileClick } = {}) {
   const quoteEl = root.querySelector('#revealQuote');
   const portraitImgEl = root.querySelector('#revealPortraitImg');
   const portraitFallbackEl = root.querySelector('#revealPortraitFallback');
+  let portraitLoadedFor = null;
 
   const tileEls = {};
   const charByName = new Map(FLAT_CHARACTERS.map((c) => [c.name, c]));
@@ -208,19 +209,27 @@ function renderBoard(root, { clickable, onTileClick } = {}) {
         nameEl.textContent = character.name;
         quoteEl.textContent = '“' + character.quote + '”';
 
-        const initials = character.name.split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase();
-        const tileColor = tileEls[character.name] ? getComputedStyle(tileEls[character.name]).color : '';
-        portraitFallbackEl.textContent = initials;
-        portraitFallbackEl.style.color = tileColor;
-        portraitFallbackEl.style.display = 'flex';
-        portraitImgEl.style.display = 'none';
-        portraitImgEl.onload = () => {
-          portraitImgEl.style.display = 'block';
-          portraitFallbackEl.style.display = 'none';
-        };
-        // Looks for a portrait at assets/portraits/<name-slug>.<ext>, trying
-        // each extension in turn, and falls back to initials if none exist.
-        loadPortrait(portraitImgEl, portraitFallbackEl, slugify(character.name), 0);
+        // applyState fires more than once per reveal (an optimistic local
+        // update, then the Firebase echo) — only restart the portrait
+        // cascade when the revealed person actually changed, otherwise
+        // re-assigning the same already-failed src can silently fail to
+        // re-fire the error event and the fallback never kicks in.
+        if (portraitLoadedFor !== character.name) {
+          portraitLoadedFor = character.name;
+          const initials = character.name.split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase();
+          const tileColor = tileEls[character.name] ? getComputedStyle(tileEls[character.name]).color : '';
+          portraitFallbackEl.textContent = initials;
+          portraitFallbackEl.style.color = tileColor;
+          portraitFallbackEl.style.display = 'flex';
+          portraitImgEl.style.display = 'none';
+          portraitImgEl.onload = () => {
+            portraitImgEl.style.display = 'block';
+            portraitFallbackEl.style.display = 'none';
+          };
+          // Looks for a portrait at assets/portraits/<name-slug>.<ext>, trying
+          // each extension in turn, and falls back to initials if none exist.
+          loadPortrait(portraitImgEl, portraitFallbackEl, slugify(character.name), 0);
+        }
       }
       overlay.classList.add('visible');
     } else {
