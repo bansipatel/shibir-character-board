@@ -97,12 +97,9 @@ function renderBoard(root, { clickable, onTileClick } = {}) {
               <div class="reveal-portrait-fallback" id="revealPortraitFallback"></div>
             </div>
             <div class="reveal-content">
-              <div class="reveal-epic" id="revealEpic"></div>
               <div class="reveal-name" id="revealName"></div>
               <div class="reveal-divider"></div>
-              <div class="reveal-quotemark reveal-quotemark-open">&ldquo;</div>
               <div class="reveal-quote" id="revealQuote"></div>
-              <div class="reveal-quotemark reveal-quotemark-close">&ldquo;</div>
             </div>
           </div>
         </div>
@@ -114,7 +111,6 @@ function renderBoard(root, { clickable, onTileClick } = {}) {
   const cloud = root.querySelector('#nameCloud');
   const overlay = root.querySelector('#revealOverlay');
   const card = root.querySelector('#revealCard');
-  const epicEl = root.querySelector('#revealEpic');
   const nameEl = root.querySelector('#revealName');
   const quoteEl = root.querySelector('#revealQuote');
   const portraitImgEl = root.querySelector('#revealPortraitImg');
@@ -194,9 +190,8 @@ function renderBoard(root, { clickable, onTileClick } = {}) {
     if (revealed) {
       const character = FLAT_CHARACTERS.find((c) => c.name === revealed);
       if (character) {
-        epicEl.textContent = character.epic;
         nameEl.textContent = character.name;
-        quoteEl.textContent = character.quote;
+        quoteEl.textContent = '“' + character.quote + '”';
 
         const initials = character.name.split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase();
         const tileColor = tileEls[character.name] ? getComputedStyle(tileEls[character.name]).color : '';

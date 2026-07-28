@@ -319,20 +319,6 @@ a:hover { color: var(--name-4); }
   text-align: left;
 }
 
-.reveal-epic {
-  display: inline-block;
-  padding: 7px 22px;
-  border-radius: 999px;
-  background: rgba(59,43,31,0.08);
-  border: 1px solid rgba(59,43,31,0.25);
-  color: var(--ink);
-  font-weight: 600;
-  font-size: 15px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-}
-
 .reveal-name {
   font-family: 'Poppins', sans-serif;
   font-weight: 800;
@@ -346,20 +332,6 @@ a:hover { color: var(--name-4); }
   background: var(--highlight);
   border-radius: 2px;
   margin: 22px 0 26px;
-}
-
-.reveal-quotemark {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  font-size: 40px;
-  color: var(--name-2);
-  line-height: 0.4;
-}
-.reveal-quotemark-open { margin-bottom: 8px; }
-.reveal-quotemark-close {
-  margin-top: 16px;
-  display: inline-block;
-  transform: scaleX(-1);
 }
 
 .reveal-quote {
