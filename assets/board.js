@@ -115,17 +115,18 @@ function renderBoard(root, { clickable, onTileClick } = {}) {
     ? allNames.slice().sort((a, b) => a.localeCompare(b))
     : shuffleWithSeed(allNames, 20260728);
 
-  const variants = assignVariants(allNames.length);
-  const variantByName = {};
-  initialOrder.forEach((name, i) => { variantByName[name] = variants[i]; });
-
+  // Colors are assigned against whatever order is actually being displayed,
+  // not a pre-repack order — otherwise the "never the same as the previous
+  // name" guarantee doesn't hold once the viewer's rows get reordered by
+  // packForCoverage.
   function buildRow(order) {
+    const variants = assignVariants(order.length);
     cloud.innerHTML = '';
     Object.keys(tileEls).forEach((k) => delete tileEls[k]);
     order.forEach((name, i) => {
       const character = charByName.get(name);
       const tag = document.createElement('span');
-      tag.className = 'name-tag name-tag-' + TILE_VARIANTS[variantByName[name]];
+      tag.className = 'name-tag name-tag-' + TILE_VARIANTS[variants[i]];
       tag.textContent = character.name;
       tag.dataset.name = character.name;
       if (clickable) {
