@@ -106,3 +106,26 @@ const FLAT_CHARACTERS = [];
 CATEGORIES.forEach((cat) => cat.chars.forEach(([name, quote]) => {
   FLAT_CHARACTERS.push({ name, quote, epic: cat.name.split(':')[0].trim() });
 }));
+
+// Display order for the name cloud — computed via a best-fit-decreasing bin
+// pack against each name's actual rendered width at the current font size,
+// so the flex-wrap rows fill edge to edge with minimal leftover whitespace
+// (measured ~3% waste/row here vs. ~12% in category-grouped order). This is
+// purely a layout order; CATEGORIES above stays the source of truth for
+// content/epic tags. If names, fonts, or the name-tag font-size ever change,
+// this order should be recomputed (see README for the recompute script).
+const BOARD_ORDER = [
+  'Chhatrapati Sambhaji Maharaj', 'Chhatrapati Shivaji Maharaj', 'Ramakrishna Paramahansa',
+  'Nachiketa', 'Bhagwan Swaminarayan', 'Maharishi Vishwamitra', 'Chandragupta Maurya',
+  'Maharishi Vashishtha', 'Rabindranath Tagore', 'Adi Shankaracharya', 'Swami Vivekananda',
+  'Raja Harishchandra', 'Narsinh Mehta', 'Maharishi Ved Vyas', 'Prithviraj Chauhan',
+  'Sant Dnyaneshwar', 'Maharishi Valmiki', 'Bhagwan Krishna', 'Maharana Pratap',
+  'Ramanujacharya', 'Mata Sharda Devi', 'Samarth Ramdas', 'Nimbarkacharya', 'Bhishma',
+  'Rani Lakshmibai', 'Emperor Ashoka', 'Vallabhacharya', 'Guru Nanak Dev', 'Madhvacharya',
+  'Bhagwan Ram', 'Rishi Dadhichi', 'Sant Tukaram', 'Sant Namdev', 'Sant Tulsidas',
+  'Sant Ravidas', 'Sant Surdas', 'Shatrughna', 'Sant Eknath', 'Abhimanyu', 'Yudhishthir',
+  'Raja Janak', 'Aryabhata', 'Lakshman', 'Chanakya', 'Sant Kabir', 'Bhim', 'Vibhishan',
+  'Hanuman', 'Meera Bai', 'Draupadi', 'Ekalavya', 'Sushruta', 'Kalidasa', 'Charaka',
+  'Maitreyi', 'Prahlad', 'Shabari', 'Jatayu', 'Bharat', 'Urmila', 'Savitri', 'Karna',
+  'Dhruv', 'Arjun', 'Gargi', 'Vidur', 'Kunti', 'Sita',
+];

@@ -66,9 +66,17 @@ function renderBoard(root, { clickable, onTileClick } = {}) {
   const quoteEl = root.querySelector('#revealQuote');
 
   const tileEls = {};
-  const variants = assignVariants(FLAT_CHARACTERS.length);
+  const charByName = new Map(FLAT_CHARACTERS.map((c) => [c.name, c]));
+  // BOARD_ORDER is a packing-optimized display order; fall back to appending
+  // anyone missing from it (e.g. a name added to CATEGORIES without
+  // recomputing the order) so nobody silently drops off the board.
+  const orderedNames = BOARD_ORDER.filter((name) => charByName.has(name));
+  FLAT_CHARACTERS.forEach((c) => { if (!orderedNames.includes(c.name)) orderedNames.push(c.name); });
 
-  FLAT_CHARACTERS.forEach((character, i) => {
+  const variants = assignVariants(orderedNames.length);
+
+  orderedNames.forEach((name, i) => {
+    const character = charByName.get(name);
     const tag = document.createElement('span');
     tag.className = 'name-tag name-tag-' + TILE_VARIANTS[variants[i]];
     tag.textContent = character.name;
