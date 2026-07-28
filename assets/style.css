@@ -1,12 +1,7 @@
 :root {
-  --grad-1: #8f7fc7;
-  --grad-2: #a58fd0;
-  --grad-3: #c7a8d9;
-  --grad-4: #eecfb0;
   --navy-1: #2d3868;
   --navy-2: #252c5e;
   --navy-3: #1c2450;
-  --title-script-gold: #f3c992;
   --coral: #df8a5c;
   --coral-hover: #e9a679;
   --cream: #fdf7ef;
@@ -28,7 +23,7 @@ html, body {
   margin: 0;
   height: 100%;
   overflow: hidden;
-  background: var(--grad-1);
+  background: #ffffff;
   color: var(--navy-1);
 }
 
@@ -46,7 +41,7 @@ a:hover { color: var(--coral-hover); }
   gap: 24px;
   text-align: center;
   padding: 24px;
-  background: var(--grad-1);
+  background: #ffffff;
 }
 
 .landing h1 {
@@ -170,7 +165,7 @@ a:hover { color: var(--coral-hover); }
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: var(--grad-1);
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -183,7 +178,7 @@ a:hover { color: var(--coral-hover); }
   flex: none;
   transform-origin: center center;
   position: relative;
-  background: var(--grad-1);
+  background: #ffffff;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -221,7 +216,7 @@ a:hover { color: var(--coral-hover); }
 
 .name-tag-v1 { color: var(--tile-1-border); }
 .name-tag-v2 { color: var(--tile-2-border); }
-.name-tag-v3 { color: var(--title-script-gold); }
+.name-tag-v3 { color: var(--tile-3-border); }
 .name-tag-v4 { color: var(--tile-4-border); }
 
 .name-tag.is-dim { opacity: 0.2; }
