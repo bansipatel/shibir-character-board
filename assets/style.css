@@ -1,30 +1,27 @@
 /* ============================================================================
-   THEME — warm, rich palette for an LED panel viewed by ~3000 people at
-   distance: a deep oxblood/maroon background (dark enough for strong LED
-   contrast, but with warmth and character instead of flat black or white),
-   gold/vermillion/teal/sky-blue name colors that read clearly from far away,
-   and a bright "spotlight" reveal card that pops dramatically against the
-   dark backdrop when a quote is shown.
+   THEME — old history-textbook / encyclopedia look: warm aged-parchment
+   background, muted ink-like jewel tones (navy, burgundy, forest green,
+   ochre) instead of neon, a serif display face for that classic printed-page
+   feel, and a "highlighter" effect on the selected name — like marking an
+   important passage in a textbook.
    ============================================================================ */
 
 :root {
-  --bg-dark: #2a1015;
-  --panel-dark: #3d1920;
-  --text-light: #fdf3e7;
-  --text-dim: #cf9f96;
-  --navy-1: #2d3868;
-  --coral: #ff6f5e;
-  --coral-hover: #ff8f7a;
-  --cream: #fdf7ef;
-  --quote-text: #4a4276;
-  --ok: #34d399;
-  --bad: #f0475f;
+  --paper: #ece0c4;
+  --paper-dark: #ddcda4;
+  --ink: #3b2b1f;
+  --ink-dim: #7a6a52;
+  --highlight: #d9a521;
+  --cream: #fdf7ea;
+  --quote-text: #4a3826;
+  --ok: #2f7d4f;
+  --bad: #a13a2f;
 
-  /* Vivid name colors — tuned to glow against --bg-dark. */
-  --name-1: #f4b942; /* gold */
-  --name-2: #ff6f5e; /* vermillion */
-  --name-3: #2dd4bf; /* teal */
-  --name-4: #7dd3fc; /* sky blue */
+  /* Muted "old book" jewel tones — tuned to read on aged parchment. */
+  --name-1: #1f3a5f; /* ink navy */
+  --name-2: #7a2331; /* deep burgundy */
+  --name-3: #355e3b; /* forest green */
+  --name-4: #a8722e; /* ochre / antique gold */
 
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
@@ -35,12 +32,12 @@ html, body {
   margin: 0;
   height: 100%;
   overflow: hidden;
-  background: var(--bg-dark);
-  color: var(--text-light);
+  background: var(--paper);
+  color: var(--ink);
 }
 
-a { color: var(--coral); }
-a:hover { color: var(--coral-hover); }
+a { color: var(--name-2); }
+a:hover { color: var(--name-4); }
 
 /* ---------------- Landing page ---------------- */
 
@@ -53,17 +50,17 @@ a:hover { color: var(--coral-hover); }
   gap: 24px;
   text-align: center;
   padding: 24px;
-  background: var(--bg-dark);
+  background: var(--paper);
 }
 
 .landing h1 {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Playfair Display', serif;
   font-weight: 800;
   font-size: 2.4rem;
   margin: 0;
-  color: var(--text-light);
+  color: var(--ink);
 }
-.landing p { color: var(--text-dim); max-width: 480px; margin: 0; font-weight: 500; }
+.landing p { color: var(--ink-dim); max-width: 480px; margin: 0; font-weight: 500; }
 
 .room-row {
   display: flex;
@@ -72,9 +69,9 @@ a:hover { color: var(--coral-hover); }
 }
 
 .room-row input {
-  background: var(--panel-dark);
-  border: 1px solid rgba(255,255,255,0.2);
-  color: var(--text-light);
+  background: var(--cream);
+  border: 1px solid var(--paper-dark);
+  color: var(--ink);
   padding: 10px 14px;
   border-radius: 8px;
   font-size: 1rem;
@@ -91,31 +88,31 @@ a:hover { color: var(--coral-hover); }
   border-radius: 12px;
   text-decoration: none;
   font-size: 1.2rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Playfair Display', serif;
   font-weight: 700;
-  color: var(--bg-dark);
+  color: var(--cream);
   background: var(--name-1);
   transition: transform 0.15s ease;
 }
 .big-link:hover { transform: translateY(-2px); }
 .big-link.secondary {
-  background: var(--panel-dark);
-  color: var(--text-light);
-  border: 1px solid rgba(255,255,255,0.2);
+  background: var(--cream);
+  color: var(--ink);
+  border: 1px solid var(--paper-dark);
 }
 
 .btn {
   border: none;
   border-radius: 8px;
   padding: 10px 18px;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Playfair Display', serif;
   font-size: 0.95rem;
   font-weight: 700;
   cursor: pointer;
-  color: var(--bg-dark);
+  color: var(--cream);
   background: var(--name-1);
 }
-.btn:hover { background: #ffcb63; }
+.btn:hover { background: #2a4d7a; }
 
 /* ---------------- Connection badge / corner logo (real viewport, not scaled) ---------------- */
 
@@ -128,9 +125,8 @@ a:hover { color: var(--coral-hover); }
   gap: 6px;
   font-size: 0.8rem;
   font-family: 'Inter', sans-serif;
-  color: var(--text-light);
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.18);
+  color: var(--cream);
+  background: rgba(59,43,31,0.75);
   padding: 6px 10px;
   border-radius: 999px;
   z-index: 100;
@@ -148,9 +144,8 @@ a:hover { color: var(--coral-hover); }
   left: 12px;
   font-size: 0.75rem;
   font-family: 'Inter', sans-serif;
-  color: var(--text-light);
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.18);
+  color: var(--cream);
+  background: rgba(59,43,31,0.75);
   padding: 6px 12px;
   border-radius: 999px;
   z-index: 100;
@@ -164,7 +159,7 @@ a:hover { color: var(--coral-hover); }
   max-height: 170px;
   width: auto;
   height: auto;
-  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6));
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
   pointer-events: none;
   z-index: 40;
 }
@@ -178,7 +173,7 @@ a:hover { color: var(--coral-hover); }
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: var(--bg-dark);
+  background: var(--paper);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -191,7 +186,7 @@ a:hover { color: var(--coral-hover); }
   flex: none;
   transform-origin: center center;
   position: relative;
-  background: var(--bg-dark);
+  background: var(--paper);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -209,7 +204,7 @@ a:hover { color: var(--coral-hover); }
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
-  gap: 2px 14px;
+  gap: 10px 18px;
   width: 100%;
   flex: 1;
   position: relative;
@@ -218,10 +213,10 @@ a:hover { color: var(--coral-hover); }
 }
 
 .name-tag {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Playfair Display', serif;
   font-weight: 800;
   font-size: 54px;
-  line-height: 1.05;
+  line-height: 1.1;
   white-space: nowrap;
   user-select: none;
   transition: all 0.35s ease;
@@ -232,12 +227,14 @@ a:hover { color: var(--coral-hover); }
 .name-tag-v3 { color: var(--name-3); }
 .name-tag-v4 { color: var(--name-4); }
 
-.name-tag.is-dim { opacity: 0.15; }
+.name-tag.is-dim { opacity: 0.25; }
 
 .name-tag.is-selected {
-  color: var(--text-light) !important;
-  transform: scale(1.15);
-  text-shadow: 0 0 18px currentColor, 0 0 46px var(--name-1);
+  color: var(--ink) !important;
+  background: var(--highlight);
+  box-shadow: 0 0 0 10px var(--highlight);
+  border-radius: 3px;
+  transform: scale(1.12);
 }
 
 /* ---------------- Reveal overlay ---------------- */
@@ -245,7 +242,7 @@ a:hover { color: var(--coral-hover); }
 .reveal-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(15,4,6,0.92);
+  background: rgba(30,20,10,0.75);
   backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
@@ -264,10 +261,11 @@ a:hover { color: var(--coral-hover); }
   width: 1080px;
   max-width: 88%;
   background: var(--cream);
-  border-radius: 28px;
+  border: 1px solid var(--paper-dark);
+  border-radius: 12px;
   padding: 70px 80px;
   text-align: center;
-  box-shadow: 0 0 120px rgba(244,185,66,0.25), 0 30px 90px rgba(0,0,0,0.6);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.45);
   position: relative;
 }
 
@@ -275,9 +273,9 @@ a:hover { color: var(--coral-hover); }
   display: inline-block;
   padding: 7px 22px;
   border-radius: 999px;
-  background: rgba(45,56,104,0.08);
-  border: 1px solid rgba(45,56,104,0.25);
-  color: var(--navy-1);
+  background: rgba(59,43,31,0.08);
+  border: 1px solid rgba(59,43,31,0.25);
+  color: var(--ink);
   font-weight: 600;
   font-size: 15px;
   letter-spacing: 1.5px;
@@ -286,18 +284,18 @@ a:hover { color: var(--coral-hover); }
 }
 
 .reveal-name {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Playfair Display', serif;
   font-weight: 800;
   font-size: 54px;
-  color: var(--navy-1);
+  color: var(--ink);
   margin-bottom: 30px;
 }
 
 .reveal-quotemark {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Playfair Display', serif;
   font-weight: 700;
   font-size: 46px;
-  color: var(--coral);
+  color: var(--name-2);
   line-height: 0.4;
 }
 .reveal-quotemark-open { margin-bottom: 10px; }
