@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shibir Character Board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <div class="landing">
+    <h1>Shibir Character Board</h1>
+    <p>Pick a screen. Open <strong>Admin</strong> on the control device, and <strong>Viewer</strong> on the device connected to the LED panels. Both must use the same room code.</p>
+
+    <div class="room-row">
+      <input id="roomInput" type="text" placeholder="room code" />
+      <button class="btn" id="saveRoom">Set room</button>
+    </div>
+
+    <div class="landing-links">
+      <a class="big-link" id="adminLink" href="admin.html">Open Admin</a>
+      <a class="big-link secondary" id="viewerLink" href="viewer.html">Open Viewer</a>
+    </div>
+  </div>
+
+  <img class="corner-logo" src="assets/logo.png" alt="" onerror="this.style.display='none'" />
+
+  <script src="assets/firebase-config.js"></script>
+  <script>
+    const input = document.getElementById('roomInput');
+    const adminLink = document.getElementById('adminLink');
+    const viewerLink = document.getElementById('viewerLink');
+
+    function currentRoom() {
+      return localStorage.getItem('shibir_room') || DEFAULT_ROOM_CODE;
+    }
+
+    function refreshLinks() {
+      const room = input.value.trim() || currentRoom();
+      adminLink.href = 'admin.html?room=' + encodeURIComponent(room);
+      viewerLink.href = 'viewer.html?room=' + encodeURIComponent(room);
+    }
+
+    input.value = currentRoom();
+    refreshLinks();
+    input.addEventListener('input', refreshLinks);
+
+    document.getElementById('saveRoom').addEventListener('click', () => {
+      const room = input.value.trim() || DEFAULT_ROOM_CODE;
+      localStorage.setItem('shibir_room', room);
+      refreshLinks();
+    });
+  </script>
+</body>
+</html>

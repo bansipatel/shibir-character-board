@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shibir — Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <div class="conn-badge"><span class="conn-dot" id="connDot"></span><span id="connText">connecting…</span></div>
+  <div class="admin-hint">Tap a name to focus &middot; tap again to reveal &middot; tap the dark backdrop to reset</div>
+
+  <div id="boardRoot"></div>
+
+  <img class="corner-logo" src="assets/logo.png" alt="" onerror="this.style.display='none'" />
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="assets/firebase-config.js"></script>
+  <script src="assets/data.js"></script>
+  <script src="assets/sync.js"></script>
+  <script src="assets/board.js"></script>
+  <script src="assets/admin.js"></script>
+</body>
+</html>
