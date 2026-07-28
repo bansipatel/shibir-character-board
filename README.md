@@ -12,12 +12,21 @@ quote/fact reveals on the viewer (LED panels).
   tap the dark backdrop to reset the whole board.
 - `viewer.html` — display screen for the LED panels. Mirrors whatever the
   admin selects in real time. Not clickable — display only.
-- `assets/data.js` — the 10 categories x 5 names (50 total) with their
-  quotes, plus the 4 rotating tile color variants.
+- `assets/data.js` — the character list, grouped by category, with each
+  name's quote.
 - `assets/board.js` — shared renderer for the fixed 1920x1080 "stage" (scales
   to fit any screen size) used by both Admin and Viewer.
-- `assets/style.css` — the visual theme (fonts, gradient, tile colors, reveal
-  card) shared by every page.
+- `assets/style.css` — the visual theme (fonts, colors, reveal card) shared
+  by every page.
+
+### Adding portrait photos
+
+The reveal card has a portrait slot next to the name/quote. It looks for an
+image at `assets/portraits/<name-slug>.jpg` (lowercase, spaces → hyphens —
+e.g. `Bhagwan Krishna` → `assets/portraits/bhagwan-krishna.jpg`). If that
+file doesn't exist, it falls back to the person's initials in the color
+already assigned to their name on the board — no code changes needed, just
+drop matching image files into `assets/portraits/`.
 
 ## Two ways it syncs
 

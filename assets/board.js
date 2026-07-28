@@ -21,6 +21,10 @@ function mulberry32(seed) {
   };
 }
 
+function slugify(name) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
 function shuffleWithSeed(list, seed) {
   const rng = mulberry32(seed);
   const arr = list.slice();
@@ -88,11 +92,18 @@ function renderBoard(root, { clickable, onTileClick } = {}) {
 
         <div class="reveal-overlay" id="revealOverlay">
           <div class="reveal-card" id="revealCard">
-            <div class="reveal-epic" id="revealEpic"></div>
-            <div class="reveal-name" id="revealName"></div>
-            <div class="reveal-quotemark reveal-quotemark-open">&ldquo;</div>
-            <div class="reveal-quote" id="revealQuote"></div>
-            <div class="reveal-quotemark reveal-quotemark-close">&ldquo;</div>
+            <div class="reveal-portrait" id="revealPortrait">
+              <img class="reveal-portrait-img" id="revealPortraitImg" alt="" />
+              <div class="reveal-portrait-fallback" id="revealPortraitFallback"></div>
+            </div>
+            <div class="reveal-content">
+              <div class="reveal-epic" id="revealEpic"></div>
+              <div class="reveal-name" id="revealName"></div>
+              <div class="reveal-divider"></div>
+              <div class="reveal-quotemark reveal-quotemark-open">&ldquo;</div>
+              <div class="reveal-quote" id="revealQuote"></div>
+              <div class="reveal-quotemark reveal-quotemark-close">&ldquo;</div>
+            </div>
           </div>
         </div>
       </div>
@@ -106,6 +117,8 @@ function renderBoard(root, { clickable, onTileClick } = {}) {
   const epicEl = root.querySelector('#revealEpic');
   const nameEl = root.querySelector('#revealName');
   const quoteEl = root.querySelector('#revealQuote');
+  const portraitImgEl = root.querySelector('#revealPortraitImg');
+  const portraitFallbackEl = root.querySelector('#revealPortraitFallback');
 
   const tileEls = {};
   const charByName = new Map(FLAT_CHARACTERS.map((c) => [c.name, c]));
@@ -184,6 +197,25 @@ function renderBoard(root, { clickable, onTileClick } = {}) {
         epicEl.textContent = character.epic;
         nameEl.textContent = character.name;
         quoteEl.textContent = character.quote;
+
+        const initials = character.name.split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase();
+        const tileColor = tileEls[character.name] ? getComputedStyle(tileEls[character.name]).color : '';
+        portraitFallbackEl.textContent = initials;
+        portraitFallbackEl.style.color = tileColor;
+        portraitFallbackEl.style.display = 'flex';
+        portraitImgEl.style.display = 'none';
+        portraitImgEl.onerror = () => {
+          portraitImgEl.style.display = 'none';
+          portraitFallbackEl.style.display = 'flex';
+        };
+        portraitImgEl.onload = () => {
+          portraitImgEl.style.display = 'block';
+          portraitFallbackEl.style.display = 'none';
+        };
+        // No real portraits yet — this looks for one at a conventional path
+        // and falls back to initials if it's not there. Drop a photo in
+        // assets/portraits/<name-slug>.jpg to have it appear automatically.
+        portraitImgEl.src = 'assets/portraits/' + slugify(character.name) + '.jpg';
       }
       overlay.classList.add('visible');
     } else {

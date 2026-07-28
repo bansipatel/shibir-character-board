@@ -269,15 +269,54 @@ a:hover { color: var(--name-4); }
 }
 
 .reveal-card {
-  width: 1080px;
-  max-width: 88%;
+  width: 1240px;
+  max-width: 90%;
   background: var(--cream);
   border: 1px solid var(--paper-dark);
-  border-radius: 12px;
-  padding: 70px 80px;
-  text-align: center;
+  border-radius: 16px;
+  padding: 56px 64px;
+  display: flex;
+  align-items: center;
+  gap: 56px;
   box-shadow: 0 30px 90px rgba(0,0,0,0.45);
   position: relative;
+}
+
+.reveal-portrait {
+  flex: none;
+  width: 300px;
+  height: 360px;
+  border-radius: 10px;
+  border: 6px solid var(--ink);
+  box-shadow: 0 0 0 3px var(--cream), 0 0 0 5px var(--paper-dark);
+  overflow: hidden;
+  position: relative;
+  background: var(--paper-dark);
+}
+
+.reveal-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+.reveal-portrait-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 84px;
+  background: var(--paper-dark);
+}
+
+.reveal-content {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
 }
 
 .reveal-epic {
@@ -291,27 +330,34 @@ a:hover { color: var(--name-4); }
   font-size: 15px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  margin-bottom: 26px;
+  margin-bottom: 20px;
 }
 
 .reveal-name {
   font-family: 'Poppins', sans-serif;
   font-weight: 800;
-  font-size: 54px;
+  font-size: 48px;
   color: var(--ink);
-  margin-bottom: 30px;
+}
+
+.reveal-divider {
+  width: 64px;
+  height: 4px;
+  background: var(--highlight);
+  border-radius: 2px;
+  margin: 22px 0 26px;
 }
 
 .reveal-quotemark {
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
-  font-size: 46px;
+  font-size: 40px;
   color: var(--name-2);
   line-height: 0.4;
 }
-.reveal-quotemark-open { margin-bottom: 10px; }
+.reveal-quotemark-open { margin-bottom: 8px; }
 .reveal-quotemark-close {
-  margin-top: 20px;
+  margin-top: 16px;
   display: inline-block;
   transform: scaleX(-1);
 }
@@ -320,7 +366,7 @@ a:hover { color: var(--name-4); }
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-style: italic;
-  font-size: 29px;
+  font-size: 26px;
   line-height: 1.55;
   color: var(--quote-text);
 }
