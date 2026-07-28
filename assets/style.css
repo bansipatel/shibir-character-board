@@ -21,7 +21,7 @@
   --name-1: #1f3a5f; /* ink navy */
   --name-2: #7a2331; /* deep burgundy */
   --name-3: #355e3b; /* forest green */
-  --name-4: #a8722e; /* ochre / antique gold */
+  --name-4: #b5541a; /* dark orange */
 
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
@@ -214,7 +214,7 @@ a:hover { color: var(--name-4); }
 
 .name-tag {
   font-family: 'Poppins', sans-serif;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 56px;
   line-height: 1.1;
   white-space: nowrap;
