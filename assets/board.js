@@ -66,6 +66,7 @@ function renderBoard(root, { clickable, onTileClick } = {}) {
   const quoteEl = root.querySelector('#revealQuote');
 
   const tileEls = {};
+  const separatorEls = [];
   const charByName = new Map(FLAT_CHARACTERS.map((c) => [c.name, c]));
   // BOARD_ORDER is a packing-optimized display order; fall back to appending
   // anyone missing from it (e.g. a name added to CATEGORIES without
@@ -87,6 +88,13 @@ function renderBoard(root, { clickable, onTileClick } = {}) {
     }
     cloud.appendChild(tag);
     tileEls[character.name] = tag;
+
+    if (i < orderedNames.length - 1) {
+      const sep = document.createElement('span');
+      sep.className = 'name-separator';
+      cloud.appendChild(sep);
+      separatorEls.push(sep);
+    }
   });
 
   if (clickable) {
@@ -101,6 +109,7 @@ function renderBoard(root, { clickable, onTileClick } = {}) {
       el.classList.toggle('is-selected', isSelected);
       el.classList.toggle('is-dim', !!selected && !isSelected);
     });
+    separatorEls.forEach((el) => el.classList.toggle('is-dim', !!selected));
 
     if (revealed) {
       const character = FLAT_CHARACTERS.find((c) => c.name === revealed);

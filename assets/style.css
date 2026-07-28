@@ -229,6 +229,17 @@ a:hover { color: var(--name-4); }
 
 .name-tag.is-dim { opacity: 0.25; }
 
+.name-separator {
+  width: 10px;
+  height: 10px;
+  flex: none;
+  align-self: center;
+  border-radius: 50%;
+  background: var(--ink-dim);
+  transition: opacity 0.35s ease;
+}
+.name-separator.is-dim { opacity: 0.15; }
+
 .name-tag.is-selected {
   color: var(--ink) !important;
   background: var(--highlight);
