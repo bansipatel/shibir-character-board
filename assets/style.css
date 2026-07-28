@@ -46,7 +46,7 @@ a:hover { color: var(--coral-hover); }
   gap: 24px;
   text-align: center;
   padding: 24px;
-  background: linear-gradient(165deg, var(--grad-1) 0%, var(--grad-2) 32%, var(--grad-3) 60%, var(--grad-4) 100%);
+  background: var(--grad-1);
 }
 
 .landing h1 {
@@ -170,7 +170,7 @@ a:hover { color: var(--coral-hover); }
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: linear-gradient(165deg, var(--grad-1) 0%, var(--grad-2) 32%, var(--grad-3) 60%, var(--grad-4) 100%);
+  background: var(--grad-1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -183,7 +183,7 @@ a:hover { color: var(--coral-hover); }
   flex: none;
   transform-origin: center center;
   position: relative;
-  background: linear-gradient(165deg, var(--grad-1) 0%, var(--grad-2) 32%, var(--grad-3) 60%, var(--grad-4) 100%);
+  background: var(--grad-1);
   overflow: hidden;
   display: flex;
   flex-direction: column;
