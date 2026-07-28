@@ -10,10 +10,10 @@
 // ============================================================================
 
 const FIREBASE_CONFIG = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
-  projectId: "YOUR_PROJECT",
+  apiKey: "AIzaSyA9kHZbO_0G4-57FXHM1KLWrOGz6-p24Wk",
+  authDomain: "historical-figures-e91f1.firebaseapp.com",
+  databaseURL: "https://historical-figures-e91f1-default-rtdb.firebaseio.com",
+  projectId: "historical-figures-e91f1",
 };
 
 // Room code — lets you reuse the same Firebase project for multiple
