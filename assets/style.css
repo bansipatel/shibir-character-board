@@ -214,7 +214,7 @@ a:hover { color: var(--name-4); }
 
 .name-tag {
   font-family: 'Poppins', sans-serif;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 56px;
   line-height: 1.1;
   white-space: nowrap;
