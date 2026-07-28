@@ -42,16 +42,6 @@ function renderBoard(root, { clickable, onTileClick } = {}) {
         <div class="dot" style="top:90px;right:140px;width:10px;height:10px;background:rgba(255,255,255,0.5)"></div>
         <div class="dot" style="bottom:60px;right:220px;width:14px;height:14px;background:rgba(223,138,92,0.5)"></div>
 
-        <div class="board-header">
-          <div class="title-main">HISTORICAL</div>
-          <div class="title-script">Figures</div>
-          <div class="subtitle-row">
-            <span class="gold-dot"></span><span class="gold-dot"></span><span class="gold-dot"></span>
-            <div class="subtitle-text">Timeless lessons, drawn from the lives that shaped them.</div>
-            <span class="gold-dot"></span><span class="gold-dot"></span><span class="gold-dot"></span>
-          </div>
-        </div>
-
         <div class="name-cloud" id="nameCloud"></div>
 
         <div class="reveal-overlay" id="revealOverlay">

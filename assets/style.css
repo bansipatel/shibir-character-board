@@ -6,13 +6,9 @@
   --navy-1: #2d3868;
   --navy-2: #252c5e;
   --navy-3: #1c2450;
-  --title-blue: #8fb3e8;
   --title-script-gold: #f3c992;
-  --gold: #f4c46a;
   --coral: #df8a5c;
   --coral-hover: #e9a679;
-  --coral-dark: #b5601f;
-  --coral-darker: #8a460f;
   --cream: #fdf7ef;
   --quote-text: #4a4276;
   --ok: #34d399;
@@ -192,61 +188,12 @@ a:hover { color: var(--coral-hover); }
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4px 90px 60px;
+  padding: 4px 16px 60px;
 }
 
 .dot {
   position: absolute;
   border-radius: 50%;
-}
-
-.board-header {
-  text-align: center;
-  margin-bottom: 30px;
-  position: relative;
-  z-index: 1;
-}
-
-.title-main {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 800;
-  font-size: 80px;
-  letter-spacing: 2px;
-  color: var(--title-blue);
-  text-shadow: 2px 2px 0 var(--navy-1), 4px 4px 0 var(--navy-3), -2px -2px 0 var(--navy-1);
-  line-height: 1;
-}
-
-.title-script {
-  font-family: 'Pacifico', cursive;
-  font-weight: 400;
-  font-size: 64px;
-  color: var(--title-script-gold);
-  text-shadow: 2px 2px 0 var(--coral-dark), 3px 3px 0 var(--coral-darker);
-  margin-top: -14px;
-  transform: rotate(-3deg);
-}
-
-.subtitle-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 16px;
-}
-.gold-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--gold);
-  display: inline-block;
-}
-.subtitle-text {
-  font-weight: 600;
-  font-style: italic;
-  font-size: 20px;
-  color: var(--navy-1);
-  letter-spacing: 0.3px;
 }
 
 .name-cloud {
@@ -259,8 +206,7 @@ a:hover { color: var(--coral-hover); }
   flex: 1;
   position: relative;
   z-index: 1;
-  padding: 10px 20px;
-  margin-top: 48px;
+  padding: 10px 4px;
 }
 
 .name-tag {
@@ -271,7 +217,6 @@ a:hover { color: var(--coral-hover); }
   white-space: nowrap;
   user-select: none;
   transition: all 0.35s ease;
-  text-shadow: 1px 1px 0 var(--navy-3), 2px 2px 0 var(--navy-3), -1px -1px 0 var(--navy-3), 1px -1px 0 var(--navy-3), -1px 1px 0 var(--navy-3);
 }
 
 .name-tag-v1 { color: var(--tile-1-border); }
@@ -284,7 +229,6 @@ a:hover { color: var(--coral-hover); }
 .name-tag.is-selected {
   color: var(--navy-1) !important;
   transform: scale(1.12);
-  text-shadow: 0 6px 18px rgba(45,56,104,0.35);
 }
 
 /* ---------------- Reveal overlay ---------------- */
