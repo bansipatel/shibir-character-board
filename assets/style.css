@@ -1,30 +1,30 @@
 /* ============================================================================
-   THEME — designed for an LED panel viewed by ~3000 people at distance:
-   near-black background (LED panels render true black with no bloom, and it
-   maximizes contrast/battery), bold saturated name colors that read clearly
-   from far away, and a bright "spotlight" reveal card that inverts to light
-   for a dramatic, unmistakable moment when a quote is shown.
+   THEME — warm, rich palette for an LED panel viewed by ~3000 people at
+   distance: a deep oxblood/maroon background (dark enough for strong LED
+   contrast, but with warmth and character instead of flat black or white),
+   gold/vermillion/teal/sky-blue name colors that read clearly from far away,
+   and a bright "spotlight" reveal card that pops dramatically against the
+   dark backdrop when a quote is shown.
    ============================================================================ */
 
 :root {
-  --bg-dark: #07060c;
-  --panel-dark: #14121f;
-  --text-light: #f5f2ff;
-  --text-dim: #9d95bd;
+  --bg-dark: #2a1015;
+  --panel-dark: #3d1920;
+  --text-light: #fdf3e7;
+  --text-dim: #cf9f96;
   --navy-1: #2d3868;
-  --navy-2: #252c5e;
-  --coral: #ff8a4c;
-  --coral-hover: #ffab7a;
+  --coral: #ff6f5e;
+  --coral-hover: #ff8f7a;
   --cream: #fdf7ef;
   --quote-text: #4a4276;
   --ok: #34d399;
   --bad: #f0475f;
 
-  /* Vivid, high-saturation name colors — tuned to glow against --bg-dark. */
-  --name-1: #4fc3f7; /* electric blue */
-  --name-2: #ff9142; /* vivid orange */
-  --name-3: #ffd166; /* bright gold */
-  --name-4: #c77dff; /* bright violet */
+  /* Vivid name colors — tuned to glow against --bg-dark. */
+  --name-1: #f4b942; /* gold */
+  --name-2: #ff6f5e; /* vermillion */
+  --name-3: #2dd4bf; /* teal */
+  --name-4: #7dd3fc; /* sky blue */
 
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
@@ -94,7 +94,7 @@ a:hover { color: var(--coral-hover); }
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
   color: var(--bg-dark);
-  background: var(--name-3);
+  background: var(--name-1);
   transition: transform 0.15s ease;
 }
 .big-link:hover { transform: translateY(-2px); }
@@ -113,9 +113,9 @@ a:hover { color: var(--coral-hover); }
   font-weight: 700;
   cursor: pointer;
   color: var(--bg-dark);
-  background: var(--name-3);
+  background: var(--name-1);
 }
-.btn:hover { background: #ffdd8f; }
+.btn:hover { background: #ffcb63; }
 
 /* ---------------- Connection badge / corner logo (real viewport, not scaled) ---------------- */
 
@@ -237,7 +237,7 @@ a:hover { color: var(--coral-hover); }
 .name-tag.is-selected {
   color: var(--text-light) !important;
   transform: scale(1.15);
-  text-shadow: 0 0 18px currentColor, 0 0 46px var(--name-3);
+  text-shadow: 0 0 18px currentColor, 0 0 46px var(--name-1);
 }
 
 /* ---------------- Reveal overlay ---------------- */
@@ -245,7 +245,7 @@ a:hover { color: var(--coral-hover); }
 .reveal-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(3,3,10,0.92);
+  background: rgba(15,4,6,0.92);
   backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
@@ -267,7 +267,7 @@ a:hover { color: var(--coral-hover); }
   border-radius: 28px;
   padding: 70px 80px;
   text-align: center;
-  box-shadow: 0 0 120px rgba(255,209,102,0.2), 0 30px 90px rgba(0,0,0,0.6);
+  box-shadow: 0 0 120px rgba(244,185,66,0.25), 0 30px 90px rgba(0,0,0,0.6);
   position: relative;
 }
 
