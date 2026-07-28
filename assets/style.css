@@ -269,23 +269,29 @@ a:hover { color: var(--name-4); }
 }
 
 .reveal-card {
-  width: 1240px;
-  max-width: 90%;
+  width: 1500px;
+  max-width: 92%;
   background: var(--cream);
   border: 1px solid var(--paper-dark);
   border-radius: 16px;
-  padding: 56px 64px;
+  padding: 48px;
   display: flex;
   align-items: center;
   gap: 56px;
   box-shadow: 0 30px 90px rgba(0,0,0,0.45);
   position: relative;
+  transform: scale(0.82);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+}
+.reveal-overlay.visible .reveal-card {
+  transform: scale(1);
+  opacity: 1;
 }
 
 .reveal-portrait {
-  flex: none;
-  width: 300px;
-  height: 360px;
+  flex: 0 0 46%;
+  height: 620px;
   border-radius: 10px;
   border: 6px solid var(--ink);
   box-shadow: 0 0 0 3px var(--cream), 0 0 0 5px var(--paper-dark);
@@ -309,7 +315,7 @@ a:hover { color: var(--name-4); }
   justify-content: center;
   font-family: 'Poppins', sans-serif;
   font-weight: 800;
-  font-size: 84px;
+  font-size: 160px;
   background: var(--paper-dark);
 }
 
