@@ -204,7 +204,7 @@ a:hover { color: var(--name-4); }
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
-  gap: 6px 10px;
+  gap: 4px 8px;
   width: 100%;
   flex: 1;
   position: relative;
@@ -215,7 +215,7 @@ a:hover { color: var(--name-4); }
 .name-tag {
   font-family: 'Poppins', sans-serif;
   font-weight: 800;
-  font-size: 54px;
+  font-size: 50px;
   line-height: 1.1;
   white-space: nowrap;
   user-select: none;
