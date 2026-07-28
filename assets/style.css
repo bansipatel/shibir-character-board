@@ -1,18 +1,30 @@
+/* ============================================================================
+   THEME — designed for an LED panel viewed by ~3000 people at distance:
+   near-black background (LED panels render true black with no bloom, and it
+   maximizes contrast/battery), bold saturated name colors that read clearly
+   from far away, and a bright "spotlight" reveal card that inverts to light
+   for a dramatic, unmistakable moment when a quote is shown.
+   ============================================================================ */
+
 :root {
+  --bg-dark: #07060c;
+  --panel-dark: #14121f;
+  --text-light: #f5f2ff;
+  --text-dim: #9d95bd;
   --navy-1: #2d3868;
   --navy-2: #252c5e;
-  --navy-3: #1c2450;
-  --coral: #df8a5c;
-  --coral-hover: #e9a679;
+  --coral: #ff8a4c;
+  --coral-hover: #ffab7a;
   --cream: #fdf7ef;
   --quote-text: #4a4276;
   --ok: #34d399;
   --bad: #f0475f;
 
-  --tile-1-bg: #a9c6ef; --tile-1-text: #1c2450; --tile-1-border: #5f88c9;
-  --tile-2-bg: #eda671; --tile-2-text: #5c2c0f; --tile-2-border: #c9713a;
-  --tile-3-bg: #f6e2b0; --tile-3-text: #6b4d12; --tile-3-border: #d1a83e;
-  --tile-4-bg: #c9a8dd; --tile-4-text: #3a1f52; --tile-4-border: #9d6fbb;
+  /* Vivid, high-saturation name colors — tuned to glow against --bg-dark. */
+  --name-1: #4fc3f7; /* electric blue */
+  --name-2: #ff9142; /* vivid orange */
+  --name-3: #ffd166; /* bright gold */
+  --name-4: #c77dff; /* bright violet */
 
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
@@ -23,8 +35,8 @@ html, body {
   margin: 0;
   height: 100%;
   overflow: hidden;
-  background: #ffffff;
-  color: var(--navy-1);
+  background: var(--bg-dark);
+  color: var(--text-light);
 }
 
 a { color: var(--coral); }
@@ -41,7 +53,7 @@ a:hover { color: var(--coral-hover); }
   gap: 24px;
   text-align: center;
   padding: 24px;
-  background: #ffffff;
+  background: var(--bg-dark);
 }
 
 .landing h1 {
@@ -49,10 +61,9 @@ a:hover { color: var(--coral-hover); }
   font-weight: 800;
   font-size: 2.4rem;
   margin: 0;
-  color: var(--navy-1);
-  text-shadow: 1px 1px 0 rgba(255,255,255,0.4);
+  color: var(--text-light);
 }
-.landing p { color: var(--navy-2); max-width: 480px; margin: 0; font-weight: 500; }
+.landing p { color: var(--text-dim); max-width: 480px; margin: 0; font-weight: 500; }
 
 .room-row {
   display: flex;
@@ -61,9 +72,9 @@ a:hover { color: var(--coral-hover); }
 }
 
 .room-row input {
-  background: var(--cream);
-  border: 1px solid var(--tile-1-border);
-  color: var(--navy-1);
+  background: var(--panel-dark);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--text-light);
   padding: 10px 14px;
   border-radius: 8px;
   font-size: 1rem;
@@ -82,15 +93,15 @@ a:hover { color: var(--coral-hover); }
   font-size: 1.2rem;
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
-  color: var(--cream);
-  background: var(--navy-1);
+  color: var(--bg-dark);
+  background: var(--name-3);
   transition: transform 0.15s ease;
 }
 .big-link:hover { transform: translateY(-2px); }
 .big-link.secondary {
-  background: var(--cream);
-  color: var(--navy-1);
-  border: 1px solid var(--tile-1-border);
+  background: var(--panel-dark);
+  color: var(--text-light);
+  border: 1px solid rgba(255,255,255,0.2);
 }
 
 .btn {
@@ -101,10 +112,10 @@ a:hover { color: var(--coral-hover); }
   font-size: 0.95rem;
   font-weight: 700;
   cursor: pointer;
-  color: var(--cream);
-  background: var(--navy-1);
+  color: var(--bg-dark);
+  background: var(--name-3);
 }
-.btn:hover { background: var(--navy-2); }
+.btn:hover { background: #ffdd8f; }
 
 /* ---------------- Connection badge / corner logo (real viewport, not scaled) ---------------- */
 
@@ -117,8 +128,9 @@ a:hover { color: var(--coral-hover); }
   gap: 6px;
   font-size: 0.8rem;
   font-family: 'Inter', sans-serif;
-  color: var(--cream);
-  background: rgba(28,36,80,0.55);
+  color: var(--text-light);
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.18);
   padding: 6px 10px;
   border-radius: 999px;
   z-index: 100;
@@ -136,8 +148,9 @@ a:hover { color: var(--coral-hover); }
   left: 12px;
   font-size: 0.75rem;
   font-family: 'Inter', sans-serif;
-  color: var(--cream);
-  background: rgba(28,36,80,0.55);
+  color: var(--text-light);
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.18);
   padding: 6px 12px;
   border-radius: 999px;
   z-index: 100;
@@ -151,7 +164,7 @@ a:hover { color: var(--coral-hover); }
   max-height: 170px;
   width: auto;
   height: auto;
-  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6));
   pointer-events: none;
   z-index: 40;
 }
@@ -165,7 +178,7 @@ a:hover { color: var(--coral-hover); }
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: #ffffff;
+  background: var(--bg-dark);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -178,7 +191,7 @@ a:hover { color: var(--coral-hover); }
   flex: none;
   transform-origin: center center;
   position: relative;
-  background: #ffffff;
+  background: var(--bg-dark);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -214,16 +227,17 @@ a:hover { color: var(--coral-hover); }
   transition: all 0.35s ease;
 }
 
-.name-tag-v1 { color: var(--tile-1-border); }
-.name-tag-v2 { color: var(--tile-2-border); }
-.name-tag-v3 { color: var(--tile-3-border); }
-.name-tag-v4 { color: var(--tile-4-border); }
+.name-tag-v1 { color: var(--name-1); }
+.name-tag-v2 { color: var(--name-2); }
+.name-tag-v3 { color: var(--name-3); }
+.name-tag-v4 { color: var(--name-4); }
 
-.name-tag.is-dim { opacity: 0.2; }
+.name-tag.is-dim { opacity: 0.15; }
 
 .name-tag.is-selected {
-  color: var(--navy-1) !important;
-  transform: scale(1.12);
+  color: var(--text-light) !important;
+  transform: scale(1.15);
+  text-shadow: 0 0 18px currentColor, 0 0 46px var(--name-3);
 }
 
 /* ---------------- Reveal overlay ---------------- */
@@ -231,7 +245,7 @@ a:hover { color: var(--coral-hover); }
 .reveal-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(30,22,60,0.7);
+  background: rgba(3,3,10,0.92);
   backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
@@ -253,7 +267,7 @@ a:hover { color: var(--coral-hover); }
   border-radius: 28px;
   padding: 70px 80px;
   text-align: center;
-  box-shadow: 0 30px 90px rgba(0,0,0,0.4);
+  box-shadow: 0 0 120px rgba(255,209,102,0.2), 0 30px 90px rgba(0,0,0,0.6);
   position: relative;
 }
 
