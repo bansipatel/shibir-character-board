@@ -269,16 +269,12 @@ a:hover { color: var(--name-4); }
 }
 
 .reveal-card {
-  width: 1500px;
-  max-width: 92%;
-  background: var(--cream);
-  border: 1px solid var(--paper-dark);
+  width: 1780px;
+  max-width: 94%;
+  aspect-ratio: 16 / 9;
   border-radius: 16px;
-  padding: 48px;
-  display: flex;
-  align-items: center;
-  gap: 56px;
-  box-shadow: 0 30px 90px rgba(0,0,0,0.45);
+  overflow: hidden;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.5);
   position: relative;
   transform: scale(0.82);
   opacity: 0;
@@ -290,13 +286,8 @@ a:hover { color: var(--name-4); }
 }
 
 .reveal-portrait {
-  flex: 0 0 46%;
-  height: 620px;
-  border-radius: 10px;
-  border: 6px solid var(--ink);
-  box-shadow: 0 0 0 3px var(--cream), 0 0 0 5px var(--paper-dark);
-  overflow: hidden;
-  position: relative;
+  position: absolute;
+  inset: 0;
   background: var(--paper-dark);
 }
 
@@ -315,21 +306,25 @@ a:hover { color: var(--name-4); }
   justify-content: center;
   font-family: 'Poppins', sans-serif;
   font-weight: 800;
-  font-size: 160px;
+  font-size: 280px;
   background: var(--paper-dark);
 }
 
 .reveal-content {
-  flex: 1;
-  min-width: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 48px 64px 56px;
+  background: linear-gradient(to top, rgba(20,12,8,0.9) 0%, rgba(20,12,8,0.6) 55%, transparent 100%);
   text-align: left;
 }
 
 .reveal-name {
   font-family: 'Poppins', sans-serif;
   font-weight: 800;
-  font-size: 48px;
-  color: var(--ink);
+  font-size: 44px;
+  color: var(--cream);
 }
 
 .reveal-divider {
@@ -337,14 +332,16 @@ a:hover { color: var(--name-4); }
   height: 4px;
   background: var(--highlight);
   border-radius: 2px;
-  margin: 22px 0 26px;
+  margin: 18px 0 20px;
 }
 
 .reveal-quote {
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-style: italic;
-  font-size: 26px;
-  line-height: 1.55;
-  color: var(--quote-text);
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--cream);
+  opacity: 0.92;
+  max-width: 900px;
 }
