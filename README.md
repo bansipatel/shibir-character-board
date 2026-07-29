@@ -12,12 +12,34 @@ quote/fact reveals on the viewer (LED panels).
   tap the dark backdrop to reset the whole board.
 - `viewer.html` — display screen for the LED panels. Mirrors whatever the
   admin selects in real time. Not clickable — display only.
-- `assets/data.js` — the character list, grouped by category, with each
-  name's quote.
+- `assets/data.csv` — the character list: category, name, quote. **Edit this
+  one in Excel/Google Sheets** — see below.
+- `assets/data.js` — fetches and parses `data.csv` at page load. You
+  shouldn't need to touch this file to update content.
 - `assets/board.js` — shared renderer for the fixed 1920x1080 "stage" (scales
   to fit any screen size) used by both Admin and Viewer.
 - `assets/style.css` — the visual theme (fonts, colors, reveal card) shared
   by every page.
+
+### Editing names/quotes (no code needed)
+
+All the content lives in `assets/data.csv`, with three columns:
+
+| category | name | quote |
+|---|---|---|
+| Ramayana | Bhagwan Ram | The seventh avatar of Vishnu... |
+
+- Open it in Excel, Google Sheets, or even GitHub's web editor.
+- **`category`** groups names together and feeds the reveal card's category
+  tag — rows with the same category don't need to be adjacent, but keeping
+  them together makes the sheet easier to read.
+- To add a name, add a new row. To remove one, delete its row. To fix a
+  quote, just edit that cell.
+- If a quote contains a comma, Excel/Sheets will automatically wrap it in
+  quotes when you export/save as CSV — you don't need to do anything special.
+- Save/export as **CSV** (keep the same `data.csv` filename), then commit
+  and push. The site re-fetches this file on every load, so no other code
+  changes are needed.
 
 ### Adding portrait photos
 
