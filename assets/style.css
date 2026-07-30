@@ -319,13 +319,15 @@ a:hover { color: var(--name-4); }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: left;
+  align-items: center;
+  text-align: center;
 }
 
 .reveal-name {
   font-family: 'Poppins', sans-serif;
   font-weight: 800;
-  font-size: 56px;
+  font-size: 84px;
+  line-height: 1.1;
   color: var(--ink);
 }
 
@@ -334,7 +336,7 @@ a:hover { color: var(--name-4); }
   height: 5px;
   background: var(--highlight);
   border-radius: 2px;
-  margin: 24px 0 32px;
+  margin: 28px auto 32px;
 }
 
 .reveal-quote {
